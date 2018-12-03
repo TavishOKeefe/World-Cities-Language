@@ -1,6 +1,6 @@
 using System;
 using MySql.Data.MySqlClient;
-using WorldData;
+using Data;
 
 namespace Data.Models
 {

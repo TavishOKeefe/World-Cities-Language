@@ -1,14 +1,22 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace Data.Models
 {
-  public class WorldData
+  public class City
   {
     private string _city;
+    private int _population;
 
-    public static List<WorldData> GetAll()
+    public City(string city, int population)
     {
-      List<WorldData> allWorldDatas = new List<WorldData>{};
+      _city = city;
+      _population = population;
+    }
+
+    public static List<City> GetAll()
+    {
+      List<City> allCitys = new List<City>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
@@ -17,11 +25,11 @@ namespace Data.Models
 
       while(rdr.Read())
       {
-        int Id = rdr.GetInt32(0);
-        string City = rdr.GetString(1);
+        string city = rdr.GetString(1);
+        int population = rdr.GetInt32(4);
 
-        WorldData newWorldData = new WorldData(Id, City);
-        allWorldDatas.Add(newWorldData);
+        City newCity = new City(city, population);
+        allCitys.Add(newCity);
       }
 
       conn.Close();
@@ -30,16 +38,24 @@ namespace Data.Models
       {
         conn.Dispose();
       }
-        return allItems;
+        return allCitys;
     }
 
     public string GetCity()
     {
       return _city;
     }
-    public string SetCity()
+    public void SetCity(string city)
     {
       _city = city;
+    }
+    public int GetPopulation()
+    {
+      return _population;
+    }
+    public void SetPopulation(int population)
+    {
+      _population = population;
     }
 
   }
