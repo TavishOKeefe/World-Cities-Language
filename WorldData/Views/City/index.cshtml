@@ -1,0 +1,11 @@
+@using Data.Models;
+
+<h2>City list</h2>
+<ul>
+@foreach (City city in Model)
+{
+  <li>@city.GetCity(): Population: @city.GetPopulation()</li>
+}
+
+
+</ul>

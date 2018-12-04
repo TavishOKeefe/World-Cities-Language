@@ -20,13 +20,13 @@ namespace Data.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM city;";
+      cmd.CommandText = @"SELECT name, population FROM city;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
       while(rdr.Read())
       {
-        string city = rdr.GetString(1);
-        int population = rdr.GetInt32(4);
+        string city = rdr.GetString(0);
+        int population = rdr.GetInt32(1);
 
         City newCity = new City(city, population);
         allCitys.Add(newCity);
