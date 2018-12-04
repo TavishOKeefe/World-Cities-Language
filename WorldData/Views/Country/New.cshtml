@@ -1,0 +1,6 @@
+@using Data.Models;
+
+@foreach (Country country in Model)
+{
+  <li>@country.GetCountry(): Population: @country.GetPopulation()</li>
+}
